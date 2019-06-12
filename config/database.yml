@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: rails-react-authentication_development
+  host: localhost
+  username: <%= File.read(Rails.root.join(%(.db-username))).chomp %>
+  password: <%= File.read(Rails.root.join(%(.db-password))).chomp %>
+
+test:
+  <<: *default
+  database: rails-react-authentication_test
+  host: localhost
+  username: <%= File.read(Rails.root.join(%(.db-username))).chomp %>
+  password: <%= File.read(Rails.root.join(%(.db-password))).chomp %>
+
+production:
+  <<: *default
+  database: rails-react-authentication_production
+  username: rails-react-authentication
+  password: <%= ENV['RAILS-REACT-AUTHENTICATION_DATABASE_PASSWORD'] %>
